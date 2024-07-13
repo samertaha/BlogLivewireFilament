@@ -61,7 +61,7 @@ class Post extends Model
         return ($mins < 1) ? 1 : $mins;
     }
 
-    public function getThumbnailImage()
+    public function getThumbnailUrl()
     {
         $isUrl = str_contains($this->image, 'http');
         return ($isUrl) ? $this->image : Storage::disk('public')->url($this->image);
