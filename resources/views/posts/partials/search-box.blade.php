@@ -1,5 +1,5 @@
 <div x-data="{
-  query: ''
+  query: '{{request('search','')}}'
 }" id="search-box">
     <div>
         <h3 class="text-lg font-semibold text-gray-900 mb-3">Search</h3>
@@ -13,7 +13,7 @@
             <input
                 {{-- wire:model.live.debounce.300ms = "search" --}}
                 {{-- wire:model = "search" --}}
-                x-model="search"
+                x-model="query"
                 class="w-40 ml-1 bg-transparent focus:outline-none focus:border-none focus:ring-0 outline-none border-none text-xs text-gray-800 placeholder:text-gray-400"
                 type="text" placeholder="Search...">
 
