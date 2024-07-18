@@ -1,31 +1,36 @@
 <div class=" px-3 lg:px-7 py-6">
     <div class="flex justify-between items-center border-b border-gray-100">
         <div class="text-gray-600">
-            @if($this->activeCategory || $search)
-            <button class="mr-3 text-xs gray-500" wire:click="clearFilters()">X</button>
+            @if ($this->activeCategory || $search)
+                <button class="mr-3 text-xs gray-500" wire:click="clearFilters()">X</button>
             @endif
-            @if($this->activeCategory)
-            <x-badge
-            wire:navigate href="{{ route('posts.index',['category'=> $this->activeCategory->slug]) }}" :textColor="$this->activeCategory->text_Color" bgColor="$this->activeCategory->bg_Color">
-               {{$this->activeCategory->title}}
-           </x-badge>
+            @if ($this->activeCategory)
+                <x-badge wire:navigate href="{{ route('posts.index', ['category' => $this->activeCategory->slug]) }}"
+                    :textColor="$this->activeCategory->text_Color" bgColor="$this->activeCategory->bg_Color">
+                    {{ $this->activeCategory->title }}
+                </x-badge>
             @endif
 
-            @if($search)
-            <span class="ml-2">
-             containing <strong>{{ $search }}</strong>
-            </span>
+            @if ($search)
+                <span class="ml-2">
+                    containing <strong>{{ $search }}</strong>
+                </span>
             @endif
         </div>
         <div class="flex items-center space-x-4 font-light ">
-            <button class="{{ $sort === 'desc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500'}} py-4" wire:click="setSort('desc')">Latest</button>
+            <x-checkbox wire:model.live="popular" />
+            <x-label> Popular </x-label>
 
-            <button class="{{ $sort === 'asc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500'}} py-4 " wire:click="setSort('asc')">Oldest</button>
+            <button class="{{ $sort === 'desc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4"
+                wire:click="setSort('desc')">Latest</button>
+
+            <button class="{{ $sort === 'asc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4 "
+                wire:click="setSort('asc')">Oldest</button>
         </div>
     </div>
     <div class="py-4">
         @foreach ($this->posts as $post)
-         <x-posts.post-item :post="$post"/>
+            <x-posts.post-item :post="$post" />
         @endforeach
     </div>
 
