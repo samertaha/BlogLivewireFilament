@@ -10,6 +10,22 @@ class EditPost extends EditRecord
 {
     protected static string $resource = PostResource::class;
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $record = $this->record;
+
+        foreach ($data as $field => $value) {
+            if ($field === 'image' && empty($value)) {
+                // Keep the current image if a new one is not uploaded
+                $data[$field] = $record->getAttribute($field);
+            } elseif ($record->{$field} === $value) {
+                unset($data[$field]);
+            }
+        }
+
+        return $data;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

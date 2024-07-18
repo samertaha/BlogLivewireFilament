@@ -31,6 +31,6 @@
         @endforelse
     </div>
     <div class="my-2">
-        {{$this->comments->links()}}
+        {{$this->comments->links(data:['scrollTo' => false])}}
     </div>
 </div>
