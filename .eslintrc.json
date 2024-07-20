@@ -1,0 +1,13 @@
+{
+    "rules": {
+        "sort-keys": [
+            "error",
+            {
+                "caseSensitive": false,
+                "minLength": 1,
+                "order": ["custom-properties", "declarations"],
+                "type": "alphabetical"
+            }
+        ]
+    }
+}
